@@ -1,0 +1,13 @@
+Name:                ElGamal
+Version:             0.0
+Description:         Haskell-Implementation des ElGamal-Verfahrens.
+License:             GPL
+License-file:        LICENSE
+Author:              Don Stewart
+Maintainer:          kimberninger@me.com
+Build-Type:          Simple
+Cabal-Version:       >=1.2
+Executable elgamal
+    Main-is:           elgamal.hs
+    Build-Depends:     base >= 3 && < 5,
+                       random == 1.0.1.1
