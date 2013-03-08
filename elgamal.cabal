@@ -3,7 +3,7 @@ Version:             0.0
 Description:         Haskell-Implementation des ElGamal-Verfahrens.
 License:             GPL
 License-file:        LICENSE
-Author:              Don Stewart
+Author:              Kim Berninger
 Maintainer:          kimberninger@me.com
 Build-Type:          Simple
 Cabal-Version:       >=1.2
