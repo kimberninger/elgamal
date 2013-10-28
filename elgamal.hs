@@ -223,7 +223,7 @@ passesMillerRabin p b = mrStep (modPow b m p) 0
 -- beginnend mit @0@.
 --
 -- Für eine Folge ohne gesetztes Bit wird @-1@ zurückgegeben.
-lowestSetBit :: Bits a => a -> Int
+lowestSetBit :: (Num a , Bits a) => a -> Int
 lowestSetBit 0 = -1
 lowestSetBit n
     | testBit n 0 = 0
