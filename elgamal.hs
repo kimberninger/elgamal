@@ -14,11 +14,16 @@
 -- nicht aus einem Tupel, sondern aus einer Liste von Tupeln, da eine Nachricht,
 -- die länger als @p@ ist, zunächst in Teilbotschaften zerlegt wird. Die Liste
 -- enthält dann die Verschlüsselungen all dieser.
-module ElGamal where
+module ElGamal ( PrivateKey
+               , PublicKey
+               , Message
+               , Secret
+               , encode
+               , decode
+               , generateKeys) where
 
 import Data.Bits
 import Data.List
-import System.IO
 import System.Random
 
 -- |Repräsentiert einen privaten Schlüssel für das ElGamal-Verfahren.
@@ -49,27 +54,6 @@ type Message    = Integer
 -- Verschlüsseln in Teilnachrichten zerbrochen wird, falls sie aus der
 -- Restgruppe herausfallen würde.
 type Secret     = [(Integer,Integer)]
-
-
--- |Fragt über die Kommandozeile eine zu verschlüsselnde Nachricht als Folge von
--- Ziffern ab, verschlüsselt und entschlüsselt diese mit Hilfe des ElGamal-
--- Verfahrens und gibt zuletzt die benutzten Schlüssel sowie die ver- und
--- entschlüsselte Nachricht aus.
-main :: IO ()
-main = do
-    putStr "zu verschlüsselnde Nachricht (m): "
-    hFlush stdout
-    gen <- getStdGen
-    message <- fmap read getLine
-    let (private@(p,a),public@(_,g,h)) = generateKeys gen
-    gen' <- newStdGen
-    let secret  = encode gen' public message
-        decoded = decode private secret
-    mapM_ putStrLn [ "Primzahl (p):                " ++ show p
-                   , "privater Schlüssel (sk):     " ++ show a
-                   , "öffentlicher Schlüssel (pk): " ++ show (g,h)
-                   , "Chiffrat:                    " ++ show secret
-                   , "entschlüsseltes Chiffrat:    " ++ show decoded]
 
 -- |Erhält einen 'RandomGen' sowie einen öffentlichen Schlüssel und eine
 -- Nachricht, kodiert als ganze Zahl.
